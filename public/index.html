@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>ajax checkbox</title>
+        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>		
+        <script type="text/javascript">
+        $(function(){
+            $('.cb').click(function(){
+                var data = [];
+                $('input.cb').each(function(){
+                    if($(this).attr('checked')){
+                        data.push($(this).val());
+                    }
+                })
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    url: 'http://localhost:5000/endpoint',						
+                    success: function(data) {
+                        console.log('success');
+                        console.log(JSON.stringify(data));
+                        //alert(data);
+                    }
+                });
+            })
+        })
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type='checkbox' class="cb" name='cb_1' value='1'/>value 1<br>
+            <input type='checkbox' class="cb" name='cb_2' value='2'/>value 2<br>
+            <input type='checkbox' class="cb" name='cb_3' value='3'/>value 3<br>
+            <input type='checkbox' class="cb" name='cb_4' value='4'/>value 4<br>
+            <input type='checkbox' class="cb" name='cb_5' value='5'/>value 5<br>
+        </form>
+    </body>
+</html>
